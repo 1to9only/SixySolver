@@ -1,0 +1,24 @@
+In[1]:= <<counts.txt
+In[2]:= <<inputcoresize2.txt
+In[3]:= <<inputcoresize3.txt
+In[4]:= <<inputcoresize4.txt
+In[5]:= Length[goodcellpairreps]
+In[6]:= If[NumberQ[count[{{3,1},{4,5}}]],Sum[count[goodcellpairreps[[i]]],{i,Length[goodcellpairreps]}]]
+In[7]:= If[NumberQ[count[{{3,1},{4,5}}]],Sum[count[goodcellpairreps[[i]]]orbitsizetuple[goodcellpairreps[[i]]],{i,Length[goodcellpairreps]}]]
+In[8]:= total=%
+In[9]:= Length[goodtriplesreps]
+In[10]:= count[ {{1,4},{3,1},{4,5}} ]
+In[11]:= If[NumberQ[count[ {{1,4},{3,1},{4,5}}]],
+Sum[count[goodtriplesreps[[i]]],{i,Length[goodtriplesreps]}]]
+In[12]:= If[NumberQ[count[ {{1,4},{3,1},{4,5}} ]],
+Sum[count[goodtriplesreps[[i]]]orbitsizetuple[goodtriplesreps[[i]]],{i,Length[goodtriplesreps]}]]
+In[13]:= total=total+%
+In[14]:= Length[gooddoubletuplereps]
+In[15]:= Flatten[{{{3,1},{4,5}},{{3,6},{4,2}}},1]
+In[16]:= If[NumberQ[count[{{3,1},{4,5},{3,6},{4,2}}]],
+Sum[count[Flatten[gooddoubletuplereps[[i]],1]],{i,Length[gooddoubletuplereps]}]]
+In[17]:= If[NumberQ[count[{{3,1},{4,5},{3,6},{4,2}}]],
+Sum[count[Flatten[gooddoubletuplereps[[i]],1]]orbitsizetuplepair[gooddoubletuplereps[[i]]],{i,Length[gooddoubletuplereps]}]/2]
+In[18]:= total=total+%
+We must divide by two because there are two ways to put 5 and 6 in the parts of 
+gooddoubletuples[[i]].
