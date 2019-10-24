@@ -28,7 +28,7 @@ Feed inputcoresize2.txt to sixy7 and append the result to counts.txt like this:
 	bash-3.2$ (./sixy7<inputcoresize2.txt)>>counts.txt
 	date
 
-This may take a while. (Over 5 hours for me.)
+This may take a few minutes.
 	
 Repeat with
 
