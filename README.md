@@ -42,9 +42,9 @@ Repeat with
 	bash-3.2$ (./sixy7<inputcoresize4.txt)>>counts.txt
 	date
 
-(over an hour)
+(ten minutes)
 
-The file counts.txt should now contain about 295 KB.
+The file counts.txt should now contain about 55 KB.
 Move counts.txt inputcoresize2.txt inputcoresize3.txt inputcoresize4.txt
 to a directory seen by Mathematica.
 You can now use the notebook
