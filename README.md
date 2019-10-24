@@ -45,7 +45,8 @@ Repeat with
 (over an hour)
 
 The file counts.txt should now contain about 295 KB.
-Move counts.txt to a directory seen by Mathematica.
+Move counts.txt inputcoresize2.txt inputcoresize3.txt inputcoresize4.txt
+to a directory seen by Mathematica.
 You can now use the notebook
 	accumulate.nb
 to get the answers.
