@@ -67,7 +67,7 @@ void output ( ) {
     printf ( "\n" ) ;
     if ( i%3 == 2 ) printf ( "\n" ) ;
   }
-  if (z>1){
+  if (z>0){
   printf ( " has unique solution %d \n\n",z ) ;
   } else { printf ( "-----------\n----------\n" ) ; }
 }
@@ -282,7 +282,7 @@ char getcell ( ) {
 
 int main ( ) {
   char i , j , a, b, c;
-  printf("verbose=1;stop=0;\n");
+  printf("\nverbose=1;stop=0;\n");
   i = getdigit();
   if (i == 1){
      verbose =1 ; printf("give core size (2, 3 or 4)\n");coresize = getdigit();} 
