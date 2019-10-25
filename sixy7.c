@@ -198,9 +198,9 @@ char check3 () {
 }
 
 char tail5(){
-  char i , j , a, b, c;
-  tails=0;
-if (!(initcheck(0)==0)){return 1;};
+    char i , j , a, b, c;
+    tails=0;
+    if (!(initcheck(0)==0)){return 1;};
     for (i=0; i<=35;i++) {startmatrix[i/6][i%6]=matrix[i/6][i%6];}
     for (i=0;i<=31;i++){
         for(j=i+1;j<=32;j++){
@@ -220,9 +220,9 @@ if (!(initcheck(0)==0)){return 1;};
 }
 
 char tail4(){
-  char i , j , a, b, c;
-  tails=0;
-if (!(initcheck(0)==0)){return 1;};
+    char i , j , a, b, c;
+    tails=0;
+    if (!(initcheck(0)==0)){return 1;};
     for (i=0; i<=35;i++) {startmatrix[i/6][i%6]=matrix[i/6][i%6];}
         for(j=0;j<=32;j++){
             for(a=j+1;a<=33;a++){
@@ -240,9 +240,9 @@ if (!(initcheck(0)==0)){return 1;};
 }
 
 char tail3(){
-  char i , j , a, b, c;  
-  tails=0;
-if (!(initcheck(0)==0)){return 1;};
+    char i , j , a, b, c;  
+    tails=0;
+    if (!(initcheck(0)==0)){return 1;};
     for (i=0; i<=35;i++) {startmatrix[i/6][i%6]=matrix[i/6][i%6];}
             for(a=0;a<=33;a++){
                 for(b=a+1;b<=34;b++){
@@ -268,13 +268,14 @@ char getcell ( ) {
   matrix [ b -1] [ c-1 ] = ((29-cell)-coresize)/4 ;
   printf("\{%d,%d}",b,c);
   if(verbose==1){printf("\n"); output();}
-  if (cell<(coresize-1)){printf(",");}else {
-  printf("}]");count=0;
-  for (i=0; i<=35;i++) {startmatrix[i/6][i%6]=matrix[i/6][i%6];}
-  if(verbose==1){printf("\n"); output();}
-  if(coresize==2){tail5();}
-  if(coresize==3){tail4();}
-  if(coresize==4){tail3();}
+  if (cell<(coresize-1)){printf(",");}
+  else {
+     printf("}]");count=0;
+     for (i=0; i<=35;i++) {startmatrix[i/6][i%6]=matrix[i/6][i%6];}
+     if(verbose==1){printf("\n"); output();}
+     if(coresize==2){tail5();}
+     if(coresize==3){tail4();}
+     if(coresize==4){tail3();}
   }
   if (verbose==1){printf("\n%d\n",matrix [ b ] [ c ]);}
   return 0;
@@ -286,11 +287,12 @@ int main ( ) {
   i = getdigit();
   if (i == 1){
      verbose =1 ; printf("give core size (2, 3 or 4)\n");coresize = getdigit();} 
-     else {coresize = i;}
+  else {coresize = i;}
   if ((coresize<2)||(coresize>4)) {printf("wrong coresize\n");return 1;}
   while (getcell(  ) == 0) {
-  if (verbose==1){printf("cell=%d\n",cell);}
-  cell = (cell+1)%coresize;};
-    return 0;
+    if (verbose==1){printf("cell=%d\n",cell);}
+    cell = (cell+1)%coresize;
+  };
+  return 0;
 }
 
