@@ -1,83 +1,82 @@
-ignore[any_]:=Null;
-ignore[1]; type[one_,p_,q_,two_,r_,s_]:=(tmptype=0 IdentityMatrix[6];tmptype=MapAt[one&,tmptype,{p,q}];MapAt[two&,tmptype,{r,s}])
-ignore[2]; inv12=IdentityMatrix[6][[{2,1,3,4,5,6}]]
-ignore[3]; arg=Table[6i+j,{i,6},{j,6}]
-ignore[4]; orbstep[matrixlist_]:=Union[matrixlist,Dot[inv12,#]&/@matrixlist,Reverse/@matrixlist,Transpose/@matrixlist];
-ignore[5]; orbit[matrixlist_]:=FixedPoint[orbstep,matrixlist]
-(* orbit gives a union of orbits *)
-ignore[6]; orbitsize[matrixlist_]:=Length[orbit[matrixlist]]
-ignore[7]; zeroes=0 IdentityMatrix[6];
-ignore[8]; matrixtuple[tuple_]:=Sum[MapAt[1&,zeroes,tuple[[i]]],{i,Length[tuple]}]
-ignore[9]; tuple[matrix_]:=Position[matrix,1]
-ignore[10]; tuplepair[matrix_]:={Position[matrix,1],Position[matrix,2]}
-ignore[11]; matrixtuplepair[{cells1_,cells2_}]:=matrixtuple[cells1]+2matrixtuple[cells2]
-ignore[12]; orbitsizetuple[tuple_]:=Length[orbit[{matrixtuple[tuple]}]]
-ignore[13]; orbitsizetuplepair[pair_]:=Length[orbit[{matrixtuple[pair[[1]]]+2matrixtuple[pair[[2]]],2matrixtuple[pair[[1]]]+matrixtuple[pair[[2]]]}]]
-ignore[14]; Save["counts.txt",{orbitsizetuple,orbitsizetuplepair}]
-ignore[15]; cellreps={{1,1},{3,1},{3,3}}
-ignore[16]; selectreps[matlist_]:=Block[{keepmats={}},Do[If[IntersectingQ[keepmats,orbit[{matlist[[i]]}]],Null,AppendTo[keepmats,matlist[[i]]]],{i,Length[matlist]}];keepmats]
-ignore[17]; with11={{3,3},{2,4},{3,4},{4,4},{2,5},{3,5},{4,5},{5,5}}
-ignore[18]; badwith11={{2,3},{1,2},{1,3},{1,4},{1,5},{2,2}}
-ignore[19]; with31={{2,3},{2,4},{4,4},{4,5}}
-ignore[20]; badwith31={{4,1},{3,2},{4,2},{3,3},{3,4},{3,5},{4,3},{5,4}}
-ignore[21]; badwith33={{4,4},{3,4}}
-ignore[22]; MapAt[4&,zeroes,with11]+MapAt[1&,zeroes,badwith11]+type[8,1,1,0,1,2]//MatrixForm
-ignore[23]; MapAt[4&,zeroes,with31]+MapAt[1&,zeroes,badwith31]+type[8,3,1,0,1,2]//MatrixForm
-ignore[24]; MapAt[1&,zeroes,badwith33]+type[8,3,3,0,1,2]//MatrixForm
-ignore[25]; cellpairreps=Union[{{1,1},#}&/@with11,{{3,1},#}&/@with31,{{1,1},#}&/@badwith11,{{3,1},#}&/@badwith31,{{3,3},#}&/@badwith33]
-ignore[26]; goodcellpairreps=Union[{{1,1},#}&/@with11,{{3,1},#}&/@with31]
-ignore[27]; goodcellpairreps::usage:="goodcellpairreps gives representatives of orbits of pairs of cells that may contain the same digit ignore a sixy puzzle."
-ignore[28]; ?goodcellpairreps
-ignore[29]; matpairreps=matrixtuple/@cellpairreps;
-ignore[30]; goodmatpairreps=matrixtuple/@goodcellpairreps;
-ignore[31]; MatrixForm/@(Table[goodmatpairreps[[i]],{i,Length[goodmatpairreps]}])
-ignore[32]; Binomial[36,2]
-ignore[33]; orbitsize[matpairreps]
-ignore[34]; Sum[orbitsize[{matpairreps[[i]]}],{i,Length[matpairreps]}]
-(* This shows that we found all orbits of pairs. *)
-ignore[35]; Length[goodmatpairs=orbit[goodmatpairreps]]
-ignore[36]; Length[goodcellpairs=tuple/@goodmatpairs]
-ignore[37]; Length[cellpairs=tuple/@(orbit[matpairreps])]
-ignore[38]; triples=Union[Flatten[Table[Union[cellpairreps[[i]],cellpairs[[j]]],{i,Length[cellpairreps]},{j,Length[cellpairs]}],1]];
-ignore[39]; triples=Select[triples,Length[#]==3&];
-ignore[40]; mattriples=matrixtuple/@triples;
-ignore[41]; orbitsize[mattriples]
-ignore[42]; Binomial[36,3]
-ignore[43]; mattriplesreps=selectreps[mattriples];
-ignore[44]; triplesreps=tuple/@mattriplesreps;
-ignore[45]; goodtriples=Union[Flatten[Table[Union[goodcellpairreps[[i]],goodcellpairs[[j]]],{i,Length[goodcellpairreps]},{j,Length[goodcellpairs]}],1]];
-ignore[46]; goodtriples=Select[goodtriples,Length[#]==3&];
-ignore[47]; goodtriples=Select[goodtriples,MemberQ[goodcellpairs,{#[[1]],#[[2]]}]&&MemberQ[goodcellpairs,{#[[2]],#[[3]]}]&&MemberQ[goodcellpairs,{#[[1]],#[[3]]}]&];
-ignore[48]; goodmattriples=matrixtuple/@goodtriples;
-ignore[49]; goodmattriplesreps=selectreps[goodmattriples];
-ignore[50]; goodtriplesreps=tuple/@goodmattriplesreps
-ignore[51]; goodtriplesreps::usage:="goodtriplesreps gives representatives of orbits of triples of cells that may contain the same digit ignore a sixy puzzle."
-ignore[52]; ?goodtriplesreps
-ignore[53]; goodcellpairs=Sort/@goodcellpairs;
-ignore[54]; gooddoubletuples=Select[Flatten[Table[List[goodcellpairreps[[i]],goodcellpairs[[j]]],{i,Length[goodcellpairreps]},{j,Length[goodcellpairs]}],1],Length[Union@@#]==4&];
-ignore[55]; gooddoubletuples=Union[gooddoubletuples,Reverse/@gooddoubletuples];
-ignore[56]; goodmatdoubles=matrixtuplepair/@gooddoubletuples;
-ignore[57]; goodmatdoublereps=selectreps[goodmatdoubles];
-ignore[58]; Length[goodmatdoublereps]
-ignore[59]; gooddoubletuples=tuplepair/@goodmatdoubles;
-ignore[60]; gooddoubletuplereps=tuplepair/@goodmatdoublereps;
-ignore[61]; gooddoubletuplereps::usage:="gooddoubletuplereps gives representatives of orbits of unordered pairs of pairs of cells where one pair may be filled with one digit and the other pair with another digit."
-ignore[62]; ?gooddoubletuplereps
-ignore[63]; coresize=2
-ignore[64]; stopnumber=0
-ignore[65]; goodcellpairreps
-ignore[66]; Save["inputcoresize2.txt",{coresize,goodcellpairreps,stopnumber}] 
-ignore[67]; coresize=3
-ignore[68]; goodtriplesreps
-ignore[69]; Save["inputcoresize3.txt",{coresize,goodtriplesreps,stopnumber}] 
-ignore[70]; coresize=4
-ignore[71]; Length[gooddoubletuplereps]
-ignore[72]; Table[gooddoubletuplereps[[i]],{i,20}]
-ignore[73]; Save["inputcoresize4.txt",{coresize,gooddoubletuplereps,stopnumber}] 
-ignore[74]; stuttertwo=Transpose[{cellreps,cellreps}]
-ignore[75]; coresize=2
-ignore[76]; Save["inputstutter2.txt",{coresize,stuttertwo,stopnumber}] 
-ignore[77]; stutterthree=Table[{goodcellpairreps[[i,1]],goodcellpairreps[[i,1]],goodcellpairreps[[i,2]]},{i,Length[goodcellpairreps]}]
-ignore[78]; coresize=3
-ignore[79]; Save["inputstutter3.txt",{coresize,stutterthree,stopnumber}] 
-ignore[80]; ?Global`*
+(* In[1]:= *) type[one_,p_,q_,two_,r_,s_]:=(tmptype=0 IdentityMatrix[6];tmptype=MapAt[one&,tmptype,{p,q}];MapAt[two&,tmptype,{r,s}])
+(* In[2]:= *) inv12=IdentityMatrix[6][[{2,1,3,4,5,6}]]
+(* In[3]:= *) arg=Table[6i+j,{i,6},{j,6}]
+(* In[4]:= *) orbstep[matrixlist_]:=Union[matrixlist,Dot[inv12,#]&/@matrixlist,Reverse/@matrixlist,Transpose/@matrixlist];
+(* In[5]:= *) orbit[matrixlist_]:=FixedPoint[orbstep,matrixlist]
+(* orbit gives a union of orbits *) 
+(* In[6]:= *) orbitsize[matrixlist_]:=Length[orbit[matrixlist]]
+(* In[7]:= *) zeroes=0 IdentityMatrix[6];
+(* In[8]:= *) matrixtuple[tuple_]:=Sum[MapAt[1&,zeroes,tuple[[i]]],{i,Length[tuple]}]
+(* In[9]:= *) tuple[matrix_]:=Position[matrix,1]
+(* In[10]:= *) tuplepair[matrix_]:={Position[matrix,1],Position[matrix,2]}
+(* In[11]:= *) matrixtuplepair[{cells1_,cells2_}]:=matrixtuple[cells1]+2matrixtuple[cells2]
+(* In[12]:= *) orbitsizetuple[tuple_]:=Length[orbit[{matrixtuple[tuple]}]]
+(* In[13]:= *) orbitsizetuplepair[pair_]:=Length[orbit[{matrixtuple[pair[[1]]]+2matrixtuple[pair[[2]]],2matrixtuple[pair[[1]]]+matrixtuple[pair[[2]]]}]]
+(* In[14]:= *) Save["counts.txt",{orbitsizetuple,orbitsizetuplepair}]
+(* In[15]:= *) cellreps={{1,1},{3,1},{3,3}}
+(* In[16]:= *) selectreps[matlist_]:=Block[{keepmats={}},Do[If[IntersectingQ[keepmats,orbit[{matlist[[i]]}]],Null,AppendTo[keepmats,matlist[[i]]]],{i,Length[matlist]}];keepmats]
+(* In[17]:= *) with11={{3,3},{2,4},{3,4},{4,4},{2,5},{3,5},{4,5},{5,5}}
+(* In[18]:= *) badwith11={{2,3},{1,2},{1,3},{1,4},{1,5},{2,2}}
+(* In[19]:= *) with31={{2,3},{2,4},{4,4},{4,5}}
+(* In[20]:= *) badwith31={{4,1},{3,2},{4,2},{3,3},{3,4},{3,5},{4,3},{5,4}}
+(* In[21]:= *) badwith33={{4,4},{3,4}}
+(* In[22]:= *) MapAt[4&,zeroes,with11]+MapAt[1&,zeroes,badwith11]+type[8,1,1,0,1,2]//MatrixForm
+(* In[23]:= *) MapAt[4&,zeroes,with31]+MapAt[1&,zeroes,badwith31]+type[8,3,1,0,1,2]//MatrixForm
+(* In[24]:= *) MapAt[1&,zeroes,badwith33]+type[8,3,3,0,1,2]//MatrixForm
+(* In[25]:= *) cellpairreps=Union[{{1,1},#}&/@with11,{{3,1},#}&/@with31,{{1,1},#}&/@badwith11,{{3,1},#}&/@badwith31,{{3,3},#}&/@badwith33]
+(* In[26]:= *) goodcellpairreps=Union[{{1,1},#}&/@with11,{{3,1},#}&/@with31]
+(* In[27]:= *) goodcellpairreps::usage:="goodcellpairreps gives representatives of orbits of pairs of cells that may contain the same digit (* In a sixy puzzle."
+(* In[28]:= *) ?goodcellpairreps
+(* In[29]:= *) matpairreps=matrixtuple/@cellpairreps;
+(* In[30]:= *) goodmatpairreps=matrixtuple/@goodcellpairreps;
+(* In[31]:= *) MatrixForm/@(Table[goodmatpairreps[[i]],{i,Length[goodmatpairreps]}])
+(* In[32]:= *) Binomial[36,2]
+(* In[33]:= *) orbitsize[matpairreps]
+(* In[34]:= *) Sum[orbitsize[{matpairreps[[i]]}],{i,Length[matpairreps]}]
+(* This shows that we found all orbits of pairs. *) 
+(* In[35]:= *) Length[goodmatpairs=orbit[goodmatpairreps]]
+(* In[36]:= *) Length[goodcellpairs=tuple/@goodmatpairs]
+(* In[37]:= *) Length[cellpairs=tuple/@(orbit[matpairreps])]
+(* In[38]:= *) triples=Union[Flatten[Table[Union[cellpairreps[[i]],cellpairs[[j]]],{i,Length[cellpairreps]},{j,Length[cellpairs]}],1]];
+(* In[39]:= *) triples=Select[triples,Length[#]==3&];
+(* In[40]:= *) mattriples=matrixtuple/@triples;
+(* In[41]:= *) orbitsize[mattriples]
+(* In[42]:= *) Binomial[36,3]
+(* In[43]:= *) mattriplesreps=selectreps[mattriples];
+(* In[44]:= *) triplesreps=tuple/@mattriplesreps;
+(* In[45]:= *) goodtriples=Union[Flatten[Table[Union[goodcellpairreps[[i]],goodcellpairs[[j]]],{i,Length[goodcellpairreps]},{j,Length[goodcellpairs]}],1]];
+(* In[46]:= *) goodtriples=Select[goodtriples,Length[#]==3&];
+(* In[47]:= *) goodtriples=Select[goodtriples,MemberQ[goodcellpairs,{#[[1]],#[[2]]}]&&MemberQ[goodcellpairs,{#[[2]],#[[3]]}]&&MemberQ[goodcellpairs,{#[[1]],#[[3]]}]&];
+(* In[48]:= *) goodmattriples=matrixtuple/@goodtriples;
+(* In[49]:= *) goodmattriplesreps=selectreps[goodmattriples];
+(* In[50]:= *) goodtriplesreps=tuple/@goodmattriplesreps
+(* In[51]:= *) goodtriplesreps::usage:="goodtriplesreps gives representatives of orbits of triples of cells that may contain the same digit (* In a sixy puzzle."
+(* In[52]:= *) ?goodtriplesreps
+(* In[53]:= *) goodcellpairs=Sort/@goodcellpairs;
+(* In[54]:= *) gooddoubletuples=Select[Flatten[Table[List[goodcellpairreps[[i]],goodcellpairs[[j]]],{i,Length[goodcellpairreps]},{j,Length[goodcellpairs]}],1],Length[Union@@#]==4&];
+(* In[55]:= *) gooddoubletuples=Union[gooddoubletuples,Reverse/@gooddoubletuples];
+(* In[56]:= *) goodmatdoubles=matrixtuplepair/@gooddoubletuples;
+(* In[57]:= *) goodmatdoublereps=selectreps[goodmatdoubles];
+(* In[58]:= *) Length[goodmatdoublereps]
+(* In[59]:= *) gooddoubletuples=tuplepair/@goodmatdoubles;
+(* In[60]:= *) gooddoubletuplereps=tuplepair/@goodmatdoublereps;
+(* In[61]:= *) gooddoubletuplereps::usage:="gooddoubletuplereps gives representatives of orbits of unordered pairs of pairs of cells where one pair may be filled with one digit and the other pair with another digit."
+(* In[62]:= *) ?gooddoubletuplereps
+(* In[63]:= *) coresize=2
+(* In[64]:= *) stopnumber=0
+(* In[65]:= *) goodcellpairreps
+(* In[66]:= *) Save["inputcoresize2.txt",{coresize,goodcellpairreps,stopnumber}] 
+(* In[67]:= *) coresize=3
+(* In[68]:= *) goodtriplesreps
+(* In[69]:= *) Save["inputcoresize3.txt",{coresize,goodtriplesreps,stopnumber}] 
+(* In[70]:= *) coresize=4
+(* In[71]:= *) Length[gooddoubletuplereps]
+(* In[72]:= *) Table[gooddoubletuplereps[[i]],{i,20}]
+(* In[73]:= *) Save["inputcoresize4.txt",{coresize,gooddoubletuplereps,stopnumber}] 
+(* In[74]:= *) stuttertwo=Transpose[{cellreps,cellreps}]
+(* In[75]:= *) coresize=2
+(* In[76]:= *) Save["inputstutter2.txt",{coresize,stuttertwo,stopnumber}] 
+(* In[77]:= *) stutterthree=Table[{goodcellpairreps[[i,1]],goodcellpairreps[[i,1]],goodcellpairreps[[i,2]]},{i,Length[goodcellpairreps]}]
+(* In[78]:= *) coresize=3
+(* In[79]:= *) Save["inputstutter3.txt",{coresize,stutterthree,stopnumber}] 
+(* In[80]:= *) ?Global`*
