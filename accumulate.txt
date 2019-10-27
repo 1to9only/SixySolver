@@ -21,4 +21,4 @@ In[17]:= If[NumberQ[count[{{3,1},{4,5},{3,6},{4,2}}]],
 Sum[count[Flatten[gooddoubletuplereps[[i]],1]]orbitsizetuplepair[gooddoubletuplereps[[i]]],{i,Length[gooddoubletuplereps]}]/2]
 In[18]:= total=total+%
 We must divide by two because there are two ways to put 5 and 6 in the parts of 
-gooddoubletuples[[i]].
+gooddoubletuplereps[[i]].
