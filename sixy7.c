@@ -267,8 +267,7 @@ char getcell ( ) {
   if (cell==0){for (i=0; i<=35;i++){matrix[i/6][i%6]=0;};printf("\ncount[\{");}
   matrix [ b -1] [ c-1 ] = ((29-cell)-coresize)/4 ;
   printf("\{%d,%d}",b,c);  
-  if (verbose==1){printf("\ndigit in cell=%d\n",matrix [ b-1 ] [ c-1 ]);}
-  if(verbose==1){printf("\n"); output();}
+  if (verbose==1){printf("\ndigit in cell=%d\n\n",matrix [ b-1 ] [ c-1 ]);output();}
   if (cell<(coresize-1)){printf(",");}
   else {
      printf("}]");count=0;
