@@ -201,6 +201,10 @@ int solve( int cell)
          grid[ cell] = value;
          if ( cell == 35 ) {
             solutions++;
+            if ( solutions == 1 ) {
+               for (int c=0; c<36; c++ ) { solution[ c] = grid[ c]; }   // save 1st solution
+            }
+            grid[ 35] = 0;
             break;
          }
          else {
